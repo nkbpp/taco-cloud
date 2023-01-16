@@ -1,9 +1,14 @@
 package sia.tacocloud.tacos.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-public record Ingredient (
-        String id,
-        String name,
-        Type type
-){
+@Data
+@AllArgsConstructor
+public class Ingredient {
+
+    private String id;
+    private String name;
+    private Type type;
+
 }
