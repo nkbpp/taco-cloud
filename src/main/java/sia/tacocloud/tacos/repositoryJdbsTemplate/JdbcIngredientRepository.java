@@ -1,10 +1,11 @@
-package sia.tacocloud.tacos.repository;
+package sia.tacocloud.tacos.repositoryJdbsTemplate;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import sia.tacocloud.tacos.domain.Ingredient;
 import sia.tacocloud.tacos.domain.Type;
+import sia.tacocloud.tacos.repository.IngredientRepository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,6 +35,21 @@ public class JdbcIngredientRepository implements IngredientRepository {
                 Optional.empty() :
                 Optional.of(results.get(0));
     }
+
+/*    @Override
+    public Ingredient findById(String id) {
+        return jdbcTemplate.queryForObject(
+                "select id, name, type from Ingredient where id=?",
+                new RowMapper<Ingredient>() {
+                    public Ingredient mapRow(ResultSet rs, int rowNum)
+                            throws SQLException {
+                        return new Ingredient(
+                                rs.getString("id"),
+                                rs.getString("name"),
+                                Type.valueOf(rs.getString("type")));
+                    }
+                }, id);
+    }*/
 
     @Override
     public Ingredient save(Ingredient ingredient) {
