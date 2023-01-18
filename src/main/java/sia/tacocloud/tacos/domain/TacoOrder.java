@@ -3,7 +3,9 @@ package sia.tacocloud.tacos.domain;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 import java.time.LocalDateTime;
@@ -11,13 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TacoOrder {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
-
-    private LocalDateTime placedAt;
 
     @NotBlank(message = "Delivery name is required")
     private String deliveryName;
@@ -39,6 +41,8 @@ public class TacoOrder {
             fraction = 0, //дробная часть
             message = "Invalid CVV")
     private String ccCVV;
+
+    private LocalDateTime placedAt;
     List<Taco> tacos = new ArrayList<>();
 
     public void addTaco(Taco taco) {
