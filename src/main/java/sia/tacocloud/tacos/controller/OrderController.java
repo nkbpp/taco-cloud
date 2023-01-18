@@ -34,12 +34,14 @@ public class OrderController {
 
     @PostMapping
     public String processOrder(@Valid TacoOrder order, Errors errors,
-                               SessionStatus sessionStatus) {
+                               SessionStatus sessionStatus //Уничтожение объектов, объявленных в сессии
+    ) {
         if (errors.hasErrors()) {
             return "orderForm";
         }
 
         orderRepository.save(order);
+        /*уничтожает объекты объявленные в @SessionAttributes(..) */
         sessionStatus.setComplete();
         return "redirect:/";
     }
