@@ -36,7 +36,7 @@ public class TacoOrder {
 
     @CreditCardNumber(message = "Not a valid credit card number")
     private String ccNumber;
-    @Pattern(regexp = "^(0[1-9]|1[0-2])([\\/])([2-9][0-9])$",
+    @Pattern(regexp = "^(0[1-9]|1[0-2])(/)([2-9]\\d)$",
             message = "Must be formatted MM/YY")
     private String ccExpiration;
     @Digits(integer = 3,
@@ -44,11 +44,22 @@ public class TacoOrder {
             message = "Invalid CVV")
     private String ccCVV;
 
-    private LocalDateTime placedAt;
+    private LocalDateTime placedAt = LocalDateTime.now();
     List<Taco> tacos = new ArrayList<>();
 
     public void addTaco(Taco taco) {
         this.tacos.add(taco);
+    }
+
+    public TacoOrder(String deliveryName, String deliveryStreet, String deliveryCity, String deliveryState, String deliveryZip, String ccNumber, String ccExpiration, String ccCVV) {
+        this.deliveryName = deliveryName;
+        this.deliveryStreet = deliveryStreet;
+        this.deliveryCity = deliveryCity;
+        this.deliveryState = deliveryState;
+        this.deliveryZip = deliveryZip;
+        this.ccNumber = ccNumber;
+        this.ccExpiration = ccExpiration;
+        this.ccCVV = ccCVV;
     }
 
 }

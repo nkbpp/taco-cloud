@@ -41,7 +41,18 @@ public class DesignTacoController {
 
     @ModelAttribute(name = "tacoOrder")
     public TacoOrder order() {
-        return new TacoOrder();
+        //return new TacoOrder(); //без заполнения
+        return new TacoOrder(
+                "Delivery",
+                "Street",
+                "Street",
+                "01",
+                "Zip",
+                "4111111111111111", //viza
+                "01/22",
+                "012"
+        ); //чтобы сразу данные заполнял
+
     }
 
     @ModelAttribute(name = "taco")
