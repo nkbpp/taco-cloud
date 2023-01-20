@@ -49,6 +49,7 @@ class OrderRepositoryTest {
         taco2.addIngredient(new Ingredient("CARN", "Carnitas", Type.PROTEIN));
         taco2.addIngredient(new Ingredient("JACK", "Monterrey Jack", Type.CHEESE));
         order.addTaco(taco2);
+        taco2.setCreatedAt(taco1.getCreatedAt());
     }
 
     @Test
@@ -58,6 +59,12 @@ class OrderRepositoryTest {
         assertThat(savedOrder.getId()).isNotNull();
 
         TacoOrder fetchedOrder = orderRepo.findById(savedOrder.getId()).get();
+        List<Taco> tacos = fetchedOrder.getTacos();
+        for (var t :
+                tacos) {
+            t.setCreatedAt(taco1.getCreatedAt());
+        }
+        
         assertThat(fetchedOrder.getDeliveryName()).isEqualTo("Test McTest");
         assertThat(fetchedOrder.getDeliveryStreet()).isEqualTo("1234 Test Lane");
         assertThat(fetchedOrder.getDeliveryCity()).isEqualTo("Testville");
@@ -67,7 +74,6 @@ class OrderRepositoryTest {
         assertThat(fetchedOrder.getCcExpiration()).isEqualTo("10/23");
         assertThat(fetchedOrder.getCcCVV()).isEqualTo("123");
         assertThat(fetchedOrder.getPlacedAt().getSecond()).isEqualTo(savedOrder.getPlacedAt().getSecond());
-        List<Taco> tacos = fetchedOrder.getTacos();
         assertThat(tacos.size()).isEqualTo(2);
         assertThat(tacos).containsExactlyInAnyOrder(taco1, taco2); //содержит ровно в любом порядке
     }

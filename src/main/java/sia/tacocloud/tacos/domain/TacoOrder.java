@@ -1,8 +1,6 @@
 package sia.tacocloud.tacos.domain;
 
-import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,17 +32,24 @@ public class TacoOrder {
     @NotBlank(message = "Zip code is required")
     private String deliveryZip;
 
+    @NotNull
     @CreditCardNumber(message = "Not a valid credit card number")
     private String ccNumber;
+    @NotNull
     @Pattern(regexp = "^(0[1-9]|1[0-2])(/)([2-9]\\d)$",
             message = "Must be formatted MM/YY")
     private String ccExpiration;
+    @NotNull
+    @Size(min = 3, max = 3, message = "Invalid CVV")
     @Digits(integer = 3,
             fraction = 0, //дробная часть
             message = "Invalid CVV")
     private String ccCVV;
 
     private LocalDateTime placedAt = LocalDateTime.now();
+
+    @NotNull
+    @Size(min = 1, message = "You must choose at least 1 taco")
     List<Taco> tacos = new ArrayList<>();
 
     public void addTaco(Taco taco) {
