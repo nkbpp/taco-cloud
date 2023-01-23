@@ -20,7 +20,7 @@ class TacoTest {
     public void whenAllAcceptable() {
         Taco taco = new Taco(
                 "TestName",
-                List.of(new IngredientRef("XXX"))
+                List.of(new Ingredient("XXX", "sdf", Type.CHEESE))
         );
 
         Set<ConstraintViolation<Taco>> violations = validator.validate(taco);

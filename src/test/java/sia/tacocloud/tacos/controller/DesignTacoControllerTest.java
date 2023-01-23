@@ -8,7 +8,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import sia.tacocloud.tacos.domain.Ingredient;
-import sia.tacocloud.tacos.domain.IngredientRef;
 import sia.tacocloud.tacos.domain.Taco;
 import sia.tacocloud.tacos.domain.Type;
 import sia.tacocloud.tacos.repository.IngredientRepository;
@@ -64,10 +63,11 @@ class DesignTacoControllerTest {
         taco.setName("Test Taco");
 
         taco.setIngredients(
-                Arrays.asList(new IngredientRef("FLTO"), new IngredientRef("GRBF"), new IngredientRef("CHED")));
-//            new Ingredient("FLTO", "Flour Tortilla", Type.WRAP),
-//            new Ingredient("GRBF", "Ground Beef", Type.PROTEIN),
-//            new Ingredient("CHED", "Cheddar", Type.CHEESE)));
+                Arrays.asList(
+                        new Ingredient("FLTO", "Flour Tortilla", Type.WRAP),
+                        new Ingredient("GRBF", "Ground Beef", Type.PROTEIN),
+                        new Ingredient("CHED", "Cheddar", Type.CHEESE))
+        );
 
     }
 

@@ -1,5 +1,6 @@
 package sia.tacocloud.tacos.domain;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -8,8 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.CreditCardNumber;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,10 +17,11 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table
+@Entity
 public class TacoOrder {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotBlank(message = "Delivery name is required")
@@ -56,6 +56,7 @@ public class TacoOrder {
 
     @NotNull
     @Size(min = 1, message = "You must choose at least 1 taco")
+    @OneToMany(cascade = CascadeType.ALL)
     List<Taco> tacos = new ArrayList<>();
 
     public void addTaco(Taco taco) {
@@ -84,4 +85,5 @@ public class TacoOrder {
         this.ccCVV = ccCVV;
         this.tacos = tacos;
     }
+
 }

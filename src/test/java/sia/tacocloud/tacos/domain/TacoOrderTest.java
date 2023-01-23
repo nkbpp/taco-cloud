@@ -17,7 +17,7 @@ class TacoOrderTest {
 
     private Taco taco = new Taco(
             "TestName",
-            List.of(new IngredientRef("XXX"))
+            List.of(new Ingredient("XXX", "sdf", Type.CHEESE))
     );
 
     @Test

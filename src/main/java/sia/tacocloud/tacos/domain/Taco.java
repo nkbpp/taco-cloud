@@ -1,11 +1,10 @@
 package sia.tacocloud.tacos.domain;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,11 +12,11 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-@Table
-//@EqualsAndHashCode(exclude = "createdAt")
+@Entity
 public class Taco {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull
@@ -26,15 +25,16 @@ public class Taco {
 
     @NotNull
     @Size(min = 1, message = "You must choose at least 1 ingredient")
-    private List<IngredientRef> ingredients = new ArrayList<>();
+    @ManyToMany
+    private List<Ingredient> ingredients = new ArrayList<>();
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
     public void addIngredient(Ingredient ingredient) {
-        this.ingredients.add(new IngredientRef(ingredient.getId()));
+        this.ingredients.add(ingredient);
     }
 
-    public Taco(String name, List<IngredientRef> ingredients) {
+    public Taco(String name, List<Ingredient> ingredients) {
         this.name = name;
         this.ingredients = ingredients;
     }
