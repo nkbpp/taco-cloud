@@ -16,6 +16,8 @@ import org.springframework.data.relational.core.mapping.Table;
         force = true //все final поля инициализируются 0 / false / null
 )
 public class Ingredient implements Persistable<String> {
+    //Spring Data Jdbc определяет, что объект новый и надо выполнить insert или такая сущность в базе данных уже есть и надо выполнить update
+    //Если идентификатор создается на стороне приложения, то такой объект должен имплементировать интерфейс Persistable и реализовать метод isNew
 
     @Id
     private String id;
