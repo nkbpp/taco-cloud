@@ -1,5 +1,11 @@
+Thymeleaf
+https://habr.com/ru/post/350862/
+
 Lombok
 https://habr.com/ru/company/piter/blog/676394/
+
+Bootstrap
+https://bootstrap-4.ru/docs/5.0/getting-started/introduction/
 
 Validation
 https://struchkov.dev/blog/spring-boot-validation/

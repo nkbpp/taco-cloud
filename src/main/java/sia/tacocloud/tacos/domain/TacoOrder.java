@@ -1,6 +1,9 @@
 package sia.tacocloud.tacos.domain;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,10 +42,13 @@ public class TacoOrder {
     @Pattern(regexp = "^(0[1-9]|1[0-2])(/)([2-9]\\d)$",
             message = "Must be formatted MM/YY")
     private String ccExpiration;
-    @NotNull
-    @Size(min = 3, max = 3, message = "Invalid CVV")
+
+    /*@Size(min = 3, max = 3, message = "Invalid CVV")
     @Digits(integer = 3,
             fraction = 0, //дробная часть
+            message = "Invalid CVV")*/
+    @NotNull
+    @Pattern(regexp = "^(\\d{3})$",
             message = "Invalid CVV")
     private String ccCVV;
 
@@ -67,4 +73,15 @@ public class TacoOrder {
         this.ccCVV = ccCVV;
     }
 
+    public TacoOrder(String deliveryName, String deliveryStreet, String deliveryCity, String deliveryState, String deliveryZip, String ccNumber, String ccExpiration, String ccCVV, List<Taco> tacos) {
+        this.deliveryName = deliveryName;
+        this.deliveryStreet = deliveryStreet;
+        this.deliveryCity = deliveryCity;
+        this.deliveryState = deliveryState;
+        this.deliveryZip = deliveryZip;
+        this.ccNumber = ccNumber;
+        this.ccExpiration = ccExpiration;
+        this.ccCVV = ccCVV;
+        this.tacos = tacos;
+    }
 }

@@ -1,4 +1,4 @@
-package sia.tacocloud.tacos;
+package sia.tacocloud.tacos.controller.browser;
 
 
 import org.junit.jupiter.api.AfterAll;

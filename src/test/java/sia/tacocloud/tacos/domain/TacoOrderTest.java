@@ -5,6 +5,8 @@ import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -12,6 +14,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 class TacoOrderTest {
     private final Validator validator = Validation.buildDefaultValidatorFactory()
             .getValidator();
+
+    private Taco taco = new Taco(
+            "TestName",
+            List.of(new IngredientRef("XXX"))
+    );
 
     @Test
     public void whenAllAcceptable() {
@@ -24,7 +31,8 @@ class TacoOrderTest {
 
                 "4111111111111111",
                 "01/22",
-                "012"
+                "012",
+                new ArrayList<>(List.of(taco))
         );
 
         Set<ConstraintViolation<TacoOrder>> violations = validator.validate(tacoOrder);
@@ -110,7 +118,8 @@ class TacoOrderTest {
 
                 "4",
                 "21/22",
-                "01"
+                "01",
+                new ArrayList<>(List.of())
         );
 
         Set<ConstraintViolation<TacoOrder>> violations = validator.validate(tacoOrder);
