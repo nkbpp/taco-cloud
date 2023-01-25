@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import sia.tacocloud.tacos.domain.TacoOrder;
 import sia.tacocloud.tacos.repository.OrderRepository;
+import sia.tacocloud.tacos.service.OrderService;
 
 @Slf4j
 @Controller
@@ -22,9 +23,12 @@ public class OrderController {
 
     private final OrderRepository orderRepository;
 
+    private final OrderService orderService;
+
     @Autowired
-    public OrderController(OrderRepository orderRepository) {
+    public OrderController(OrderRepository orderRepository, OrderService orderService) {
         this.orderRepository = orderRepository;
+        this.orderService = orderService;
     }
 
     @GetMapping("/current")
@@ -41,6 +45,7 @@ public class OrderController {
         }
 
         orderRepository.save(order);
+        TacoOrder t = orderService.findById(1L);
         /*уничтожает объекты объявленные в @SessionAttributes(..) */
         sessionStatus.setComplete();
         return "redirect:/";
