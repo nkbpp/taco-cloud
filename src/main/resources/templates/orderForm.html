@@ -27,7 +27,7 @@
     <h3>Deliver my taco masterpieces to...</h3>
 
     <label for="deliveryName">Name: </label>
-    <input type="text" th:field="*{deliveryName}"/>
+    <input type="text" th:field="*{deliveryName}" id="deliveryName"/>
     <span class="validationError"
           th:if="${#fields.hasErrors('deliveryName')}"
           th:errors="*{deliveryName}">Name Error</span>
@@ -80,7 +80,7 @@
     <span class="validationError"
           th:if="${#fields.hasErrors('ccExpiration')}"
           th:errors="*{ccExpiration}">CC Num Error</span>
-    
+
     <br/>
 
     <label for="ccCVV">CVV: </label>
