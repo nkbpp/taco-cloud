@@ -16,9 +16,6 @@ class IngredientRepositoryTest {
     @Autowired
     IngredientRepository ingredientRepo;
 
-    //@Autowired
-    //JdbcTemplate jdbc;
-
     @Test
     public void findByIdCorrect() {
         Optional<Ingredient> flto = ingredientRepo.findById("FLTO");
