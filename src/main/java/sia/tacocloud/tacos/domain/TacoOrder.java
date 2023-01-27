@@ -59,6 +59,9 @@ public class TacoOrder {
     @OneToMany(cascade = CascadeType.ALL)
     List<Taco> tacos = new ArrayList<>();
 
+    @ManyToOne
+    private MyUser user;
+
     public void addTaco(Taco taco) {
         this.tacos.add(taco);
     }

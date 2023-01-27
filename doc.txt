@@ -9,3 +9,9 @@ https://bootstrap-4.ru/docs/5.0/getting-started/introduction/
 
 Validation
 https://struchkov.dev/blog/spring-boot-validation/
+
+MappedSuperclass
+https://javascopes.com/how-to-inherit-properties-from-a-base-class-entity-using-mappedsuperclass-with-jpa-and-hibernate-669ce64a/
+
+Несколько баз данных для Spring Boot приложения
+https://struchkov.dev/blog/multiple-databases-spring-boot/

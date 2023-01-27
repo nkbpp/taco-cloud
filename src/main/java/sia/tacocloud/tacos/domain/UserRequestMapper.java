@@ -7,7 +7,7 @@ import sia.tacocloud.tacos.domain.dto.RegistrationForm;
 import java.util.function.Function;
 
 @Component
-public class UserRequestMapper implements Function<RegistrationForm, User> {
+public class UserRequestMapper implements Function<RegistrationForm, MyUser> {
 
     private final PasswordEncoder passwordEncoder;
 
@@ -16,11 +16,11 @@ public class UserRequestMapper implements Function<RegistrationForm, User> {
     }
 
     @Override
-    public User apply(RegistrationForm registrationForm) {
-        return new User(
+    public MyUser apply(RegistrationForm registrationForm) {
+        return new MyUser(
                 null,
-                registrationForm.username(),
-                passwordEncoder.encode(registrationForm.username()),
+                registrationForm.username().trim(),
+                passwordEncoder.encode(registrationForm.password().trim()),
                 registrationForm.fullname(),
                 registrationForm.street(),
                 registrationForm.city(),

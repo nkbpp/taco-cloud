@@ -9,25 +9,25 @@
 <body>
 <h1>Register</h1>
 <img th:src="@{/images/TacoCloud.png}"/>
-<form method="POST" th:action="@{/register}" id="registerForm">
+<form method="POST" th:action="@{/register}" id="registerForm" th:object="${registration}">
     <label for="username">Username: </label>
-    <input type="text" name="username" id="username"/><br/>
+    <input type="text" name="username" id="username" th:field="*{username}"/><br/>
     <label for="password">Password: </label>
-    <input type="password" name="password" id="password"/><br/>
+    <input type="password" name="password" id="password" th:field="*{password}" autocomplete="on"/><br/>
     <label for="confirm">Confirm password: </label>
     <input type="password" name="confirm" id="confirm"/><br/>
     <label for="fullname">Full name: </label>
-    <input type="text" name="fullname" id="fullname"/><br/>
+    <input type="text" name="fullname" id="fullname" th:field="*{fullname}"/><br/>
     <label for="street">Street: </label>
-    <input type="text" name="street" id="street"/><br/>
+    <input type="text" name="street" id="street" th:field="*{street}"/><br/>
     <label for="city">City: </label>
-    <input type="text" name="city" id="city"/><br/>
+    <input type="text" name="city" id="city" th:field="*{city}"/><br/>
     <label for="state">State: </label>
-    <input type="text" name="state" id="state"/><br/>
+    <input type="text" name="state" id="state" th:field="*{state}"/><br/>
     <label for="zip">Zip: </label>
-    <input type="text" name="zip" id="zip"/><br/>
+    <input type="text" name="zip" id="zip" th:field="*{zip}"/><br/>
     <label for="phone">Phone: </label>
-    <input type="text" name="phone" id="phone"/><br/>
+    <input type="text" name="phone" id="phone" th:field="*{phone}"/><br/>
     <input type="submit" value="Register"/>
 </form>
 </body>

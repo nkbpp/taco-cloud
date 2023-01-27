@@ -11,6 +11,7 @@ import sia.tacocloud.tacos.domain.Taco;
 import sia.tacocloud.tacos.domain.TacoOrder;
 import sia.tacocloud.tacos.domain.Type;
 import sia.tacocloud.tacos.repository.IngredientRepository;
+import sia.tacocloud.tacos.repository.TacoRepository;
 
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -22,9 +23,11 @@ import java.util.stream.StreamSupport;
 public class DesignTacoController {
 
     private final IngredientRepository ingredientRepository;
+    private final TacoRepository tacoRepository;
 
-    public DesignTacoController(IngredientRepository ingredientRepository) {
+    public DesignTacoController(IngredientRepository ingredientRepository, TacoRepository tacoRepository) {
         this.ingredientRepository = ingredientRepository;
+        this.tacoRepository = tacoRepository;
     }
 
     @ModelAttribute
@@ -45,7 +48,7 @@ public class DesignTacoController {
         return new TacoOrder(
                 "Delivery",
                 "Street",
-                "Street",
+                "City",
                 "01",
                 "Zip",
                 "4111111111111111", //viza
@@ -66,14 +69,16 @@ public class DesignTacoController {
     }
 
     @PostMapping
-    public String processTaco(@Valid Taco taco, Errors errors,
+    public String processTaco(@Valid Taco taco,
+                              Errors errors,
                               @ModelAttribute TacoOrder tacoOrder) {
         if (errors.hasErrors()) {
             return "design";
         }
 
-        tacoOrder.addTaco(taco);
-        log.info("Processing taco: {}", taco);
+        Taco saved = tacoRepository.save(taco);
+        tacoOrder.addTaco(saved);
+        
         return "redirect:/orders/current";
     }
 
